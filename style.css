@@ -1,0 +1,441 @@
+/* ====== Basis ====== */
+body{
+  font-family: Arial, sans-serif;
+  margin:0;
+  background:#f5f5f5;
+  color:#333;
+}
+
+.container{
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.card{
+  background:#fff;
+  margin: 20px 0;
+  padding: 24px;
+  border-radius: 8px;
+}
+
+/* ====== Header / Navi ====== */
+header{
+  background:#1f4e79;
+  color:#fff;
+  padding: 28px 0;
+  text-align:center;
+}
+
+header h1{
+  margin: 0 0 6px 0;
+}
+
+nav{
+  background:#333;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav .container{
+  display:flex;
+  gap: 14px;
+  justify-content:center;
+  flex-wrap: wrap;
+  padding: 10px 16px;
+}
+
+nav a{
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+nav a:hover{
+  text-decoration: underline;
+}
+
+/* ====== Hero / Buttons ====== */
+.hero{
+  background:#e3eef7;
+}
+
+.button{
+  display:inline-block;
+  background:#1f4e79;
+  color:#fff;
+  padding: 12px 18px;
+  text-decoration:none;
+  border-radius: 6px;
+}
+
+.button:hover{
+  background:#163a5a;
+}
+
+/* ====== Listen ====== */
+ul{
+  padding-left: 20px;
+}
+
+li{
+  margin: 8px 0;
+}
+
+/* ====== Form ====== */
+form input, form textarea{
+  width:100%;
+  padding:10px;
+  margin: 8px 0;
+  font-size: 1em;
+  box-sizing: border-box;
+}
+
+form button{
+  width:100%;
+  border:none;
+  padding:12px;
+  background:#1f4e79;
+  color:#fff;
+  font-size: 1em;
+  cursor:pointer;
+  border-radius: 6px;
+}
+
+form button:hover{
+  background:#163a5a;
+}
+
+/* ====== Footer ====== */
+footer{
+  background:#333;
+  color:#fff;
+  padding: 18px 0;
+  margin-top: 40px;
+  text-align:center;
+}
+
+footer a{
+  color:#ccc;
+  text-decoration:none;
+}
+
+footer a:hover{
+  color:#fff;
+}
+
+/* ====== Hinweistext ====== */
+.hinweis{
+  color:#666;
+  font-size: 0.95em;
+}
+
+/* ====== Mobile ====== */
+@media (max-width: 600px){
+  header{
+    padding: 22px 0;
+  }
+}
+
+/* ====== Leistungen: Karten + Modal ====== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+.service-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 18px;
+  cursor: pointer;
+  transition: transform 0.08s ease-in-out;
+  border: 1px solid #eee;
+}
+
+.service-card:hover {
+  transform: translateY(-2px);
+}
+
+.service-card h3 {
+  margin: 0 0 8px 0;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.badge {
+  background: #e3eef7;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.9em;
+}
+
+.service-card .more {
+  margin-top: 12px;
+  font-weight: bold;
+  color: #1f4e79;
+}
+
+/* Modal (Dialog) */
+dialog.modal {
+  width: min(920px, 92vw);
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+}
+
+dialog::backdrop {
+  background: rgba(0,0,0,0.55);
+}
+
+.modal-header {
+  background: #1f4e79;
+  color: white;
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.modal-close {
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.modal-body {
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 18px;
+}
+
+@media (max-width: 800px) {
+  .modal-body { grid-template-columns: 1fr; }
+}
+
+.modal-body img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 10px;
+  background: #f0f0f0;
+}
+
+.modal-body ul {
+  margin: 10px 0 0 0;
+}
+
+.small-note {
+  color: #666;
+  font-size: 0.95em;
+  margin-top: 10px;
+}
+
+.section-title {
+  margin-top: 0;
+}
+
+/* ====== Über mich – Hingucker ====== */
+.about-hero{
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+@media (max-width: 800px){
+  .about-hero{
+    grid-template-columns: 1fr;
+  }
+}
+
+.about-box{
+  background: linear-gradient(135deg, #1f4e79, #163a5a);
+  color: white;
+  padding: 26px;
+  border-radius: 12px;
+}
+
+.about-box h2{
+  margin-top: 0;
+}
+
+.about-highlights{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 16px;
+}
+
+@media (max-width: 700px){
+  .about-highlights{
+    grid-template-columns: 1fr;
+  }
+}
+
+.highlight{
+  background: #e3eef7;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.highlight strong{
+  display: block;
+  font-size: 1.4em;
+  color: #1f4e79;
+}
+
+.about-photo{
+  width: 100%;
+  height: 320px;
+  border-radius: 14px;
+  object-fit: cover;
+  background: #ddd;
+}
+
+.about-quote{
+  font-style: italic;
+  border-left: 4px solid #1f4e79;
+  padding-left: 16px;
+  margin-top: 20px;
+  color: #424242;
+}
+
+/* ====== Kontakt – Hingucker ====== */
+.contact-hero{
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 800px){
+  .contact-hero{ grid-template-columns: 1fr; }
+}
+
+.contact-card{
+  border: 1px solid #eee;
+}
+
+.contact-title{
+  margin-top: 0;
+}
+
+.info-box{
+  background: #e3eef7;
+  padding: 16px;
+  border-radius: 10px;
+}
+
+.kv{
+  margin: 0;
+}
+
+.kv div{
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.kv div:last-child{
+  border-bottom: none;
+}
+
+.kv b{
+  color: #1f4e79;
+}
+
+.quick-actions{
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.button.secondary{
+  background: #333;
+}
+
+.button.secondary:hover{
+  background: #222;
+}
+
+.form-hint{
+  color:#666;
+  font-size: 0.95em;
+}
+
+/* ====== Einheitlicher Header auf allen Seiten ====== */
+.site-header{
+  background:#1f4e79;
+  color:white;
+}
+
+.header-layout{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+/* Logo links oben */
+.logo-left{
+  position: absolute;
+  left: 0;
+  max-width: 120px;
+  height: auto;
+}
+
+/* Text mittig */
+.header-center{
+  text-align: center;
+}
+
+.header-center h1{
+  margin: 0;
+}
+
+.header-center p{
+  margin: 6px 0 0 0;
+}
+
+/* Mobile */
+@media (max-width: 700px){
+  .header-layout{
+    flex-direction: column;
+  }
+
+  .logo-left{
+    position: static;
+    margin-bottom: 10px;
+    max-width: 110px;
+  }
+}
