@@ -47,34 +47,43 @@
         Schreiben Sie mir kurz Ihr Anliegen. Ich melde mich schnellstmöglich zurück.
       </p>
 
-      <form action="https://formspree.io/f/mpqqwjqy" method="POST">
+   <form action="https://formspree.io/f/mpqqwjqy"
+      method="POST"
+      enctype="multipart/form-data">
 
-        <!-- Spam-Schutz -->
-        <input type="text" name="_gotcha" style="display:none">
+  <!-- Spam-Schutz -->
+  <input type="text" name="_gotcha" style="display:none">
 
-        <input type="text" name="name" placeholder="Ihr Name" required>
+  <input type="text" name="name" placeholder="Ihr Name" required>
 
-        <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
+  <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
 
-        <input type="tel" name="telefon" placeholder="Telefonnummer (für Rückruf)">
+  <input type="tel" name="telefon" placeholder="Telefonnummer (für Rückruf)">
 
-        <input type="text" name="ort" placeholder="Ort (z. B. Gernsheim, Darmstadt, Mainz)">
+  <input type="text" name="ort" placeholder="Ort (z. B. Gernsheim, Darmstadt, Mainz)">
 
-        <textarea name="message" rows="6"
-          placeholder="Ihre Anfrage (Was ist zu tun? Wann? Grobe Adresse?)"
-          required></textarea>
+  <!-- Bilder Upload -->
+  <label style="margin-top:10px; display:block;">
+    Bilder anhängen (optional):
+    <input type="file" name="bilder" accept="image/*" multiple>
+  </label>
 
-        <!-- E-Mail-Betreff -->
-        <input type="hidden" name="_subject" value="Neue Anfrage über haustechniksauer.de">
+  <textarea name="message" rows="6"
+    placeholder="Ihre Anfrage (Was ist zu tun? Wann? Grobe Adresse?)"
+    required></textarea>
 
-        <!-- Weiterleitung nach Absenden -->
-        <input type="hidden" name="_next"
-          value="https://www.haustechniksauer.de/kontakt.html?status=sent">
+  <!-- E-Mail-Betreff -->
+  <input type="hidden" name="_subject"
+         value="Neue Anfrage mit Bildern über haustechniksauer.de">
 
-        <button type="submit">Anfrage absenden</button>
+  <!-- Weiterleitung nach Absenden -->
+  <input type="hidden" name="_next"
+         value="https://www.haustechniksauer.de/kontakt.html?status=sent">
 
-      </form>
-    </div>
+  <button type="submit">Anfrage absenden</button>
+
+</form>
+
 
     <!-- Direktkontakt -->
     <div class="info-box">
