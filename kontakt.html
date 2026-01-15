@@ -47,44 +47,44 @@
         Schreiben Sie mir kurz Ihr Anliegen. Ich melde mich schnellstmöglich zurück.
       </p>
 
-   <form action="https://formspree.io/f/mpqqwjqy"
-      method="POST"
-      enctype="multipart/form-data">
+      <form action="https://formspree.io/f/mpqqwjqy"
+            method="POST"
+            enctype="multipart/form-data">
 
-  <!-- Spam-Schutz -->
-  <input type="text" name="_gotcha" style="display:none">
+        <!-- Spam-Schutz -->
+        <input type="text" name="_gotcha" style="display:none">
 
-  <input type="text" name="name" placeholder="Ihr Name" required>
+        <input type="text" name="name" placeholder="Ihr Name" required>
 
-  <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
+        <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
 
-  <input type="tel" name="telefon" placeholder="Telefonnummer (für Rückruf)">
+        <input type="tel" name="telefon" placeholder="Telefonnummer (für Rückruf)">
 
-  <input type="text" name="ort" placeholder="Ort (z. B. Gernsheim, Darmstadt, Mainz)">
+        <input type="text" name="ort" placeholder="Ort (z. B. Gernsheim, Darmstadt, Mainz)">
 
-  <!-- Bilder Upload -->
-  <label style="margin-top:10px; display:block;">
-    Bilder anhängen (optional):
-    <input type="file" name="bilder" accept="image/*" multiple>
-  </label>
+        <!-- Bilder Upload (MEHRERE möglich) -->
+        <label style="margin-top:10px; display:block;">
+          Bilder anhängen (optional, mehrere möglich):
+          <input type="file" name="bilder[]" accept="image/*" multiple>
+        </label>
 
-  <textarea name="message" rows="6"
-    placeholder="Ihre Anfrage (Was ist zu tun? Wann? Grobe Adresse?)"
-    required></textarea>
+        <textarea name="message" rows="6"
+          placeholder="Ihre Anfrage (Was ist zu tun? Wann? Grobe Adresse?)"
+          required></textarea>
 
-  <!-- E-Mail-Betreff -->
-  <input type="hidden" name="_subject"
-         value="Neue Anfrage mit Bildern über haustechniksauer.de">
+        <!-- E-Mail-Betreff -->
+        <input type="hidden" name="_subject"
+               value="Neue Anfrage mit Bildern über haustechniksauer.de">
 
-  <!-- Weiterleitung nach Absenden -->
-  <input type="hidden" name="_next"
-         value="https://www.haustechniksauer.de/kontakt.html?status=sent">
+        <!-- Weiterleitung nach Absenden -->
+        <input type="hidden" name="_next"
+               value="https://www.haustechniksauer.de/kontakt.html?status=sent">
 
-  <button type="submit">Anfrage absenden</button>
+        <button type="submit">Anfrage absenden</button>
 
-</form>
+      </form>
 
-       </div>
+    </div>
 
     <!-- Direktkontakt -->
     <div class="info-box">
