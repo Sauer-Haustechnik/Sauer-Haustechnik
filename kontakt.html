@@ -3,28 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kontakt – Hausservice & Klimaservice Hessen</title>
+  <title>Kontakt – Sauer Hausservice & Klima · Kälte</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-layout">
-  
-      <!-- Logo links oben -->
-      <img src="logo_transparent.png"
-           alt="Sauer Hausservice · Klima · Kälte Logo"
-           class="logo-left">
-  
-      <!-- Zentrierter Titel -->
-      <div class="header-center">
-        <h1>Sauer Hausservice · Klima · Kälte</h1>
-        <p>Service rund ums Haus · Wartung · Kleinreparaturen</p>
-      </div>
-  
+<header class="site-header">
+  <div class="container header-layout">
+    <img src="logo_transparent.png"
+         alt="Sauer Hausservice · Klima · Kälte Logo"
+         class="logo-left">
+
+    <div class="header-center">
+      <h1>Sauer Hausservice · Klima · Kälte</h1>
+      <p>Service rund ums Haus · Wartung · Kleinreparaturen</p>
     </div>
-  </header>
-  
+  </div>
+</header>
+
 <nav>
   <div class="container">
     <a href="index.html">Start</a>
@@ -37,36 +33,48 @@
 <main class="container">
 
   <section class="card contact-hero">
-    <!-- Formular -->
+
+    <!-- Erfolgsmeldungen -->
     <script>
       const s = new URLSearchParams(location.search).get("status");
-      if (s === "sent") alert("Danke! Ihre Anfrage wurde gesendet.");
-      if (s === "fail") alert("Sorry! Versand hat nicht funktioniert. Bitte rufen Sie an oder schreiben Sie eine E-Mail.");
-      if (s === "missing") alert("Bitte Name, E-Mail und Nachricht ausfüllen.");
-      if (s === "email") alert("Bitte eine gültige E-Mail-Adresse eingeben.");
+      if (s === "sent") alert("Danke! Ihre Anfrage wurde erfolgreich gesendet.");
     </script>
-    
+
+    <!-- Kontaktformular -->
     <div class="card contact-card">
       <h2 class="contact-title">Kontaktformular</h2>
       <p class="form-hint">
-        Hinweis: Leider funktioniert dieses Kontaktformular noch nicht . Bis dahin kannst du direkt per Telefon oder E-Mail kontaktieren.
+        Schreiben Sie mir kurz Ihr Anliegen. Ich melde mich schnellstmöglich zurück.
       </p>
 
-      <form action="contact.php" method="post">
-        <!-- Honeypot gegen Spam (Feld muss leer bleiben) -->
-        <input type="text" name="website" placeholder="Bitte leer lassen" style="display:none" tabindex="-1" autocomplete="off">
-      
-        <input type="text" name="name" placeholder="Name" required />
-        <input type="email" name="email" placeholder="E-Mail" required />
-        <input type="text" name="ort" placeholder="Ort (z. B. Gernsheim / Darmstadt / Mainz)" />
-        <textarea name="nachricht" rows="6" placeholder="Ihre Anfrage (kurz beschreiben: was ist zu tun, wann, Adresse grob?)" required></textarea>
-      
+      <form action="https://formspree.io/f/mpqqwjqy" method="POST">
+
+        <!-- Spam-Schutz -->
+        <input type="text" name="_gotcha" style="display:none">
+
+        <input type="text" name="name" placeholder="Ihr Name" required>
+
+        <input type="email" name="email" placeholder="Ihre E-Mail-Adresse" required>
+
+        <input type="text" name="ort" placeholder="Ort (z. B. Gernsheim, Darmstadt, Mainz)">
+
+        <textarea name="message" rows="6"
+          placeholder="Ihre Anfrage (Was ist zu tun? Wann? Grobe Adresse?)"
+          required></textarea>
+
+        <!-- E-Mail-Betreff -->
+        <input type="hidden" name="_subject" value="Neue Anfrage über haustechniksauer.de">
+
+        <!-- Weiterleitung nach Absenden -->
+        <input type="hidden" name="_next"
+          value="https://www.haustechniksauer.de/kontakt.html?status=sent">
+
         <button type="submit">Anfrage absenden</button>
+
       </form>
-      
     </div>
 
-    <!-- Infos -->
+    <!-- Direktkontakt -->
     <div class="info-box">
       <h2 class="contact-title">Direktkontakt</h2>
 
@@ -78,16 +86,18 @@
 
       <div class="quick-actions">
         <a class="button" href="tel:015224406732">Jetzt anrufen</a>
-        <a class="button secondary" href="mailto:sauer.phil@icloud.com?subject=Anfrage%20Hausservice%20%2F%20Klimaservice&body=Hallo%2C%0A%0Aich%20habe%20folgende%20Anfrage%3A%0A-%20Ort%3A%20%0A-%20T%C3%A4tigkeit%3A%20%0A-%20Wunschtermin%3A%20%0A%0AVielen%20Dank%21">
+        <a class="button secondary"
+           href="mailto:sauer.phil@icloud.com?subject=Anfrage%20Hausservice%20/%20Klimaservice">
           E-Mail schreiben
         </a>
         <a class="button" href="index.html">Zur Startseite</a>
       </div>
 
       <p class="form-hint" style="margin-top:12px;">
-        Tipp: Für schnellere Angebote bitte kurz Ort + Tätigkeit + Fotos (wenn möglich) mitschicken.
+        Tipp: Für schnellere Angebote bitte Ort + Tätigkeit + Fotos mitschicken.
       </p>
     </div>
+
   </section>
 
 </main>
