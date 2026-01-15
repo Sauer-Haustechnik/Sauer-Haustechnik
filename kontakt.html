@@ -62,11 +62,21 @@
 
         <input type="text" name="ort" placeholder="Ort (z. B. Gernsheim, Darmstadt, Mainz)">
 
-        <!-- Bilder Upload (MEHRERE möglich) -->
+        <!-- Bilder Upload + Vorschau -->
         <label style="margin-top:10px; display:block;">
-          Bilder anhängen (optional, mehrere möglich):
-          <input type="file" name="bilder[]" accept="image/*" multiple>
+          Bilder anhängen (optional, max. 5 Bilder, je max. 10 MB):
+          <input type="file"
+                 id="bilderInput"
+                 name="bilder[]"
+                 accept="image/*"
+                 multiple>
         </label>
+
+        <!-- Meldung für Fehler -->
+        <div id="uploadHinweis" class="form-hint" style="margin-top:8px;"></div>
+
+        <!-- Vorschau-Liste -->
+        <div id="bildListe" style="margin-top:10px;"></div>
 
         <textarea name="message" rows="6"
           placeholder="Ihre Anfrage (Was ist zu tun? Wann? Grobe Adresse?)"
@@ -123,6 +133,161 @@
     </p>
   </div>
 </footer>
+
+<!-- Script: Bilder mit Thumbnail anzeigen + einzeln löschen + Begrenzung -->
+<script>
+  const bilderInput = document.getElementById("bilderInput");
+  const bildListe = document.getElementById("bildListe");
+  const uploadHinweis = document.getElementById("uploadHinweis");
+
+  const MAX_FILES = 5;
+  const MAX_SIZE_BYTES = 10 * 1024 * 1024; // 10 MB
+
+  // Wir speichern Dateien + Preview-URL
+  let dateien = []; // { file: File, url: string }
+
+  bilderInput.addEventListener("change", function () {
+    uploadHinweis.textContent = ""; // reset
+
+    const neu = Array.from(bilderInput.files);
+
+    // Filter: nur Bilder + Größe prüfen
+    const gueltigeDateien = [];
+    const fehler = [];
+
+    for (const file of neu) {
+      if (!file.type.startsWith("image/")) {
+        fehler.push(`"${file.name}" ist kein Bild und wurde ignoriert.`);
+        continue;
+      }
+      if (file.size > MAX_SIZE_BYTES) {
+        fehler.push(`"${file.name}" ist zu groß (${formatBytes(file.size)}). Max. 10 MB.`);
+        continue;
+      }
+      gueltigeDateien.push(file);
+    }
+
+    // Limit prüfen (bereits ausgewählt + neue)
+    const freiePlaetze = MAX_FILES - dateien.length;
+    if (freiePlaetze <= 0) {
+      fehler.push(`Maximal ${MAX_FILES} Bilder erlaubt. Bitte erst ein Bild löschen, um ein neues hinzuzufügen.`);
+    }
+
+    // Nur so viele hinzufügen, wie noch Platz ist
+    const hinzufuegen = gueltigeDateien.slice(0, Math.max(0, freiePlaetze));
+    if (gueltigeDateien.length > hinzufuegen.length) {
+      fehler.push(`Es wurden nur ${hinzufuegen.length} weitere Bilder übernommen (Max. ${MAX_FILES} insgesamt).`);
+    }
+
+    for (const file of hinzufuegen) {
+      const url = URL.createObjectURL(file);
+      dateien.push({ file, url });
+    }
+
+    // Info anzeigen (wenn was war)
+    if (fehler.length > 0) {
+      uploadHinweis.textContent = fehler.join(" ");
+    } else {
+      uploadHinweis.textContent = `Ausgewählt: ${dateien.length}/${MAX_FILES} Bilder.`;
+    }
+
+    updateListe();
+    syncInput();
+
+    // Damit erneutes Auswählen derselben Datei wieder "change" auslöst:
+    bilderInput.value = "";
+  });
+
+  function updateListe() {
+    bildListe.innerHTML = "";
+
+    if (dateien.length === 0) {
+      uploadHinweis.textContent = "";
+      return;
+    }
+
+    dateien.forEach((item, index) => {
+      const row = document.createElement("div");
+      row.style.display = "grid";
+      row.style.gridTemplateColumns = "84px 1fr auto";
+      row.style.gap = "10px";
+      row.style.alignItems = "center";
+      row.style.marginBottom = "10px";
+      row.style.padding = "10px";
+      row.style.border = "1px solid #eee";
+      row.style.borderRadius = "8px";
+      row.style.background = "#fff";
+
+      const img = document.createElement("img");
+      img.src = item.url;
+      img.alt = "Vorschau";
+      img.style.width = "84px";
+      img.style.height = "64px";
+      img.style.objectFit = "cover";
+      img.style.borderRadius = "6px";
+      img.style.border = "1px solid #eee";
+
+      const info = document.createElement("div");
+      info.style.minWidth = "0";
+
+      const name = document.createElement("div");
+      name.textContent = item.file.name;
+      name.style.fontWeight = "bold";
+      name.style.overflow = "hidden";
+      name.style.textOverflow = "ellipsis";
+      name.style.whiteSpace = "nowrap";
+
+      const meta = document.createElement("div");
+      meta.style.color = "#666";
+      meta.style.fontSize = "0.9em";
+      meta.textContent = formatBytes(item.file.size);
+
+      info.appendChild(name);
+      info.appendChild(meta);
+
+      const remove = document.createElement("button");
+      remove.type = "button";
+      remove.textContent = "Löschen";
+      remove.style.border = "none";
+      remove.style.background = "#c0392b";
+      remove.style.color = "white";
+      remove.style.borderRadius = "8px";
+      remove.style.cursor = "pointer";
+      remove.style.padding = "8px 12px";
+
+      remove.onclick = () => {
+        URL.revokeObjectURL(dateien[index].url);
+        dateien.splice(index, 1);
+        updateListe();
+        syncInput();
+        uploadHinweis.textContent = dateien.length ? `Ausgewählt: ${dateien.length}/${MAX_FILES} Bilder.` : "";
+      };
+
+      row.appendChild(img);
+      row.appendChild(info);
+      row.appendChild(remove);
+
+      bildListe.appendChild(row);
+    });
+  }
+
+  function syncInput() {
+    const dataTransfer = new DataTransfer();
+    dateien.forEach(item => dataTransfer.items.add(item.file));
+    bilderInput.files = dataTransfer.files;
+  }
+
+  function formatBytes(bytes) {
+    const units = ["B", "KB", "MB", "GB"];
+    let i = 0;
+    let num = bytes;
+    while (num >= 1024 && i < units.length - 1) {
+      num /= 1024;
+      i++;
+    }
+    return `${num.toFixed(i === 0 ? 0 : 1)} ${units[i]}`;
+  }
+</script>
 
 </body>
 </html>
