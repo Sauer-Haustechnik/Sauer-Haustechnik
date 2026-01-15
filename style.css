@@ -76,6 +76,14 @@ nav a:hover{
   background:#163a5a;
 }
 
+.button.secondary{
+  background:#333;
+}
+
+.button.secondary:hover{
+  background:#222;
+}
+
 /* ====== Listen ====== */
 ul{
   padding-left: 20px;
@@ -86,12 +94,17 @@ li{
 }
 
 /* ====== Form ====== */
-form input, form textarea{
+form input,
+form textarea{
   width:100%;
   padding:10px;
   margin: 8px 0;
   font-size: 1em;
   box-sizing: border-box;
+}
+
+form input[type="file"]{
+  background:#fff;
 }
 
 form button{
@@ -103,6 +116,7 @@ form button{
   font-size: 1em;
   cursor:pointer;
   border-radius: 6px;
+  margin-top: 10px;
 }
 
 form button:hover{
@@ -128,19 +142,12 @@ footer a:hover{
 }
 
 /* ====== Hinweistext ====== */
-.hinweis{
+.form-hint{
   color:#666;
   font-size: 0.95em;
 }
 
-/* ====== Mobile ====== */
-@media (max-width: 600px){
-  header{
-    padding: 22px 0;
-  }
-}
-
-/* ====== Leistungen: Karten + Modal ====== */
+/* ====== Grid / Leistungen ====== */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -154,209 +161,29 @@ footer a:hover{
   .grid { grid-template-columns: 1fr; }
 }
 
-.service-card {
-  background: #fff;
-  border-radius: 10px;
-  padding: 18px;
-  cursor: pointer;
-  transition: transform 0.08s ease-in-out;
-  border: 1px solid #eee;
-}
-
-.service-card:hover {
-  transform: translateY(-2px);
-}
-
-.service-card h3 {
-  margin: 0 0 8px 0;
-}
-
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 10px;
-}
-
-.badge {
-  background: #e3eef7;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-size: 0.9em;
-}
-
-.service-card .more {
-  margin-top: 12px;
-  font-weight: bold;
-  color: #1f4e79;
-}
-
-/* Modal (Dialog) */
-dialog.modal {
-  width: min(920px, 92vw);
-  border: none;
-  border-radius: 12px;
-  padding: 0;
-  overflow: hidden;
-}
-
-dialog::backdrop {
-  background: rgba(0,0,0,0.55);
-}
-
-.modal-header {
-  background: #1f4e79;
-  color: white;
-  padding: 14px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-header h3 {
-  margin: 0;
-  font-size: 1.1em;
-}
-
-.modal-close {
-  border: none;
-  background: transparent;
-  color: white;
-  font-size: 22px;
-  cursor: pointer;
-  line-height: 1;
-}
-
-.modal-body {
-  padding: 18px;
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 18px;
-}
-
-@media (max-width: 800px) {
-  .modal-body { grid-template-columns: 1fr; }
-}
-
-.modal-body img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 10px;
-  background: #f0f0f0;
-}
-
-.modal-body ul {
-  margin: 10px 0 0 0;
-}
-
-.small-note {
-  color: #666;
-  font-size: 0.95em;
-  margin-top: 10px;
-}
-
-.section-title {
-  margin-top: 0;
-}
-
-/* ====== Über mich – Hingucker ====== */
-.about-hero{
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 24px;
-  align-items: center;
-}
-
-@media (max-width: 800px){
-  .about-hero{
-    grid-template-columns: 1fr;
-  }
-}
-
-.about-box{
-  background: linear-gradient(135deg, #1f4e79, #163a5a);
-  color: white;
-  padding: 26px;
-  border-radius: 12px;
-}
-
-.about-box h2{
-  margin-top: 0;
-}
-
-.about-highlights{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 16px;
-}
-
-@media (max-width: 700px){
-  .about-highlights{
-    grid-template-columns: 1fr;
-  }
-}
-
-.highlight{
-  background: #e3eef7;
-  padding: 16px;
-  border-radius: 10px;
-  text-align: center;
-}
-
-.highlight strong{
-  display: block;
-  font-size: 1.4em;
-  color: #1f4e79;
-}
-
-.about-photo{
-  width: 100%;
-  height: 320px;
-  border-radius: 14px;
-  object-fit: cover;
-  background: #ddd;
-}
-
-.about-quote{
-  font-style: italic;
-  border-left: 4px solid #1f4e79;
-  padding-left: 16px;
-  margin-top: 20px;
-  color: #424242;
-}
-
-/* ====== Kontakt – Hingucker ====== */
+/* ====== Kontakt – FINAL LAYOUT ====== */
 .contact-hero{
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 18px;
-  align-items: start;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 24px;
+  align-items: stretch;
 }
 
-@media (max-width: 800px){
-  .contact-hero{ grid-template-columns: 1fr; }
-}
-
+/* Formular links */
 .contact-card{
   border: 1px solid #eee;
+  height: 100%;
 }
 
-.contact-title{
-  margin-top: 0;
-}
-
+/* Direktkontakt rechts */
 .info-box{
   background: #e3eef7;
-  padding: 16px;
+  padding: 18px;
   border-radius: 10px;
+  height: 100%;
 }
 
-.kv{
-  margin: 0;
-}
-
+/* Key-Value Liste */
 .kv div{
   display: grid;
   grid-template-columns: 110px 1fr;
@@ -379,20 +206,14 @@ dialog::backdrop {
   margin-top: 14px;
 }
 
-.button.secondary{
-  background: #333;
+/* ====== Mobil ====== */
+@media (max-width: 900px){
+  .contact-hero{
+    grid-template-columns: 1fr;
+  }
 }
 
-.button.secondary:hover{
-  background: #222;
-}
-
-.form-hint{
-  color:#666;
-  font-size: 0.95em;
-}
-
-/* ====== Einheitlicher Header auf allen Seiten ====== */
+/* ====== Einheitlicher Header ====== */
 .site-header{
   background:#1f4e79;
   color:white;
@@ -406,7 +227,6 @@ dialog::backdrop {
   padding: 20px 0;
 }
 
-/* Logo links oben */
 .logo-left{
   position: absolute;
   left: 0;
@@ -414,7 +234,6 @@ dialog::backdrop {
   height: auto;
 }
 
-/* Text mittig */
 .header-center{
   text-align: center;
 }
@@ -427,7 +246,6 @@ dialog::backdrop {
   margin: 6px 0 0 0;
 }
 
-/* Mobile */
 @media (max-width: 700px){
   .header-layout{
     flex-direction: column;
